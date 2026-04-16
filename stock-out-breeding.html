@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>养殖领用出库</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/stock-out-form.css">
+</head>
+<body>
+  <div class="container">
+    <!-- 页面标题 -->
+    <div class="page-header">
+      <a href="stock-in-select.html" class="back-btn">‹</a>
+      <h1>养殖领用出库</h1>
+    </div>
+    
+    <!-- 表单 -->
+    <div class="form-section">
+      <div class="section-title">出库信息</div>
+      <div class="form-group">
+        <div class="form-item">
+          <span class="form-label">出库基地</span>
+          <input type="text" class="form-input" placeholder="请选择" value="千岛湖基地A区" readonly>
+          <span class="form-arrow">›</span>
+        </div>
+        <div class="form-item">
+          <span class="form-label">入库记录</span>
+          <input type="text" class="form-input" placeholder="请选择" value="草鱼饲料 - 500kg" readonly>
+          <span class="form-arrow">›</span>
+        </div>
+        <div class="form-item">
+          <span class="form-label">出库数量</span>
+          <input type="number" class="form-input" placeholder="请输入出库数量" value="150">
+          <span class="form-unit">kg</span>
+        </div>
+        <div class="form-item">
+          <span class="form-label">领用人</span>
+          <input type="text" class="form-input" placeholder="请选择或输入">
+          <span class="form-arrow">›</span>
+        </div>
+        <div class="form-item">
+          <span class="form-label">领用日期</span>
+          <input type="date" class="form-input" value="2024-01-15">
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-section">
+      <div class="section-title">溯源信息（选填）</div>
+      <div class="form-group">
+        <div class="form-item">
+          <span class="form-label">溯源码绑定</span>
+          <input type="text" class="form-input" placeholder="扫描或输入溯源码">
+          <span class="scan-btn">📷</span>
+        </div>
+        <div class="form-item textarea-item">
+          <span class="form-label">备注说明</span>
+          <textarea class="form-textarea" placeholder="请输入备注信息（选填）"></textarea>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 提示信息 -->
+    <div class="tips-box">
+      <div class="tips-title">💡 温馨提示</div>
+      <div class="tips-content">
+        当前入库记录剩余库存：<strong>350kg</strong>，请确保出库数量不超过库存数量。
+      </div>
+    </div>
+  </div>
+  
+  <!-- 底部操作栏 -->
+  <div class="bottom-bar">
+    <button class="btn btn-default" onclick="history.back()">取消</button>
+    <button class="btn btn-primary" onclick="submitForm()">确认出库</button>
+  </div>
+  
+  <script>
+    function submitForm() {
+      // 表单验证
+      const quantity = document.querySelector('input[type="number"]').value;
+      if (!quantity || quantity <= 0) {
+        alert('请输入有效的出库数量');
+        return;
+      }
+      alert('出库成功！');
+      window.location.href = 'stock-out-list.html';
+    }
+  </script>
+</body>
+</html>

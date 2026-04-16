@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>入库管理</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/stock-out-form.css">
+</head>
+<body>
+  <div class="container">
+    <!-- 页面标题 -->
+    <div class="page-header">
+      <a href="index.html" class="back-btn">‹</a>
+      <h1>入库管理</h1>
+    </div>
+    
+    <!-- 表单 -->
+    <div class="form-section">
+      <div class="section-title">入库信息</div>
+      <div class="form-group">
+        <div class="form-item">
+          <span class="form-label">入库基地</span>
+          <input type="text" class="form-input" placeholder="请选择基地">
+          <span class="form-arrow">›</span>
+        </div>
+        <div class="form-item">
+          <span class="form-label">物品类型</span>
+          <input type="text" class="form-input" placeholder="请选择类型">
+          <span class="form-arrow">›</span>
+        </div>
+        <div class="form-item">
+          <span class="form-label">物品名称</span>
+          <input type="text" class="form-input" placeholder="请输入物品名称">
+        </div>
+        <div class="form-item">
+          <span class="form-label">规格</span>
+          <input type="text" class="form-input" placeholder="请输入规格">
+        </div>
+        <div class="form-item">
+          <span class="form-label">入库数量</span>
+          <input type="number" class="form-input" placeholder="请输入数量">
+          <span class="form-unit">kg/L</span>
+        </div>
+        <div class="form-item">
+          <span class="form-label">入库日期</span>
+          <input type="date" class="form-input" value="2024-01-15">
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-section">
+      <div class="section-title">供应商信息</div>
+      <div class="form-group">
+        <div class="form-item">
+          <span class="form-label">供应商</span>
+          <input type="text" class="form-input" placeholder="请输入供应商名称">
+        </div>
+        <div class="form-item">
+          <span class="form-label">批次号</span>
+          <input type="text" class="form-input" placeholder="请输入批次号">
+        </div>
+        <div class="form-item textarea-item">
+          <span class="form-label">备注说明</span>
+          <textarea class="form-textarea" placeholder="请输入备注信息（选填）"></textarea>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 上传区域 -->
+    <div class="form-section">
+      <div class="section-title">附件上传</div>
+      <div class="upload-box">
+        <div class="upload-item">
+          <span class="upload-icon">📷</span>
+          <span class="upload-text">上传凭证照片</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 底部操作栏 -->
+  <div class="bottom-bar">
+    <button class="btn btn-default" onclick="history.back()">取消</button>
+    <button class="btn btn-primary" onclick="submitForm()">确认入库</button>
+  </div>
+  
+  <script>
+    function submitForm() {
+      alert('入库成功！');
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>选择出库类型</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/drawer-select.css">
+</head>
+<body>
+  <div class="container">
+    <!-- 页面标题 -->
+    <div class="page-header">
+      <a href="stock-out-list.html" class="back-btn">‹</a>
+      <h1>选择出库类型</h1>
+    </div>
+    
+    <!-- 类型选择列表 -->
+    <div class="type-select-list">
+      <label class="type-select-item">
+        <input type="radio" name="stockOutType" value="breeding" class="type-radio">
+        <div class="type-content">
+          <div class="type-icon breeding">🌾</div>
+          <div class="type-info">
+            <div class="type-title">养殖领用</div>
+            <div class="type-desc">饲料、药品等物资领用出库</div>
+          </div>
+        </div>
+        <div class="type-check"></div>
+      </label>
+      
+      <label class="type-select-item">
+        <input type="radio" name="stockOutType" value="sales" class="type-radio">
+        <div class="type-content">
+          <div class="type-icon sales">💰</div>
+          <div class="type-info">
+            <div class="type-title">销售出库</div>
+            <div class="type-desc">成品鱼销售出库，关联入库记录</div>
+          </div>
+        </div>
+        <div class="type-check"></div>
+      </label>
+    </div>
+    
+    <!-- 入库记录选择（销售出库时显示） -->
+    <div class="section-title" id="stockInSectionTitle" style="display:none;">选择入库记录</div>
+    <div class="fishing-list" id="stockInList" style="display:none;">
+      <label class="fishing-item">
+        <input type="radio" name="stockInRecord" value="RK202401150001" class="fishing-radio">
+        <div class="fishing-content">
+          <div class="fishing-header">
+            <span class="fishing-no">入库单号：RK202401150001</span>
+            <span class="fishing-status type-transfer">生产转入</span>
+          </div>
+          <div class="fishing-info">
+            <div class="fishing-row">
+              <span class="fishing-label">基地：</span>
+              <span class="fishing-value">千岛湖基地A区</span>
+            </div>
+            <div class="fishing-row">
+              <span class="fishing-label">品种：</span>
+              <span class="fishing-value">有机草鱼</span>
+            </div>
+            <div class="fishing-row">
+              <span class="fishing-label">数量：</span>
+              <span class="fishing-value highlight">500尾</span>
+            </div>
+            <div class="fishing-row">
+              <span class="fishing-label">入库时间：</span>
+              <span class="fishing-value">2024-01-15 10:30</span>
+            </div>
+          </div>
+        </div>
+      </label>
+      
+      <label class="fishing-item">
+        <input type="radio" name="stockInRecord" value="RK202401140002" class="fishing-radio">
+        <div class="fishing-content">
+          <div class="fishing-header">
+            <span class="fishing-no">入库单号：RK202401140002</span>
+            <span class="fishing-status type-transfer">生产转入</span>
+          </div>
+          <div class="fishing-info">
+            <div class="fishing-row">
+              <span class="fishing-label">基地：</span>
+              <span class="fishing-value">千岛湖基地B区</span>
+            </div>
+            <div class="fishing-row">
+              <span class="fishing-label">品种：</span>
+              <span class="fishing-value">有机鲤鱼</span>
+            </div>
+            <div class="fishing-row">
+              <span class="fishing-label">数量：</span>
+              <span class="fishing-value highlight">800尾</span>
+            </div>
+            <div class="fishing-row">
+              <span class="fishing-label">入库时间：</span>
+              <span class="fishing-value">2024-01-14 14:20</span>
+            </div>
+          </div>
+        </div>
+      </label>
+    </div>
+  </div>
+  
+  <!-- 底部操作栏 -->
+  <div class="bottom-bar">
+    <button class="btn btn-default" onclick="history.back()">取消</button>
+    <button class="btn btn-primary" onclick="nextStep()">下一步</button>
+  </div>
+  
+  <script>
+    // 监听出库类型选择
+    document.querySelectorAll('input[name="stockOutType"]').forEach(radio => {
+      radio.addEventListener('change', function() {
+        const stockInSection = document.getElementById('stockInSectionTitle');
+        const stockInList = document.getElementById('stockInList');
+        
+        if (this.value === 'sales') {
+          stockInSection.style.display = 'block';
+          stockInList.style.display = 'block';
+        } else {
+          stockInSection.style.display = 'none';
+          stockInList.style.display = 'none';
+          // 清除入库记录选择
+          document.querySelectorAll('input[name="stockInRecord"]').forEach(r => r.checked = false);
+        }
+      });
+    });
+    
+    function nextStep() {
+      const typeSelected = document.querySelector('input[name="stockOutType"]:checked');
+      
+      if (!typeSelected) {
+        alert('请选择出库类型');
+        return;
+      }
+      
+      const type = typeSelected.value;
+      
+      if (type === 'breeding') {
+        // 养殖领用 - 直接进入详情页
+        window.location.href = 'stock-out-breeding-new.html';
+      } else if (type === 'sales') {
+        // 销售出库 - 需要选择入库记录
+        const stockInSelected = document.querySelector('input[name="stockInRecord"]:checked');
+        if (!stockInSelected) {
+          alert('请选择入库记录');
+          return;
+        }
+        window.location.href = 'stock-out-sales-new.html?stockInId=' + stockInSelected.value;
+      }
+    }
+  </script>
+</body>
+</html>

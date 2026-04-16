@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>选择入库类型</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/drawer-select.css">
+</head>
+<body>
+  <div class="container">
+    <!-- 页面标题 -->
+    <div class="page-header">
+      <a href="stock-in-list.html" class="back-btn">‹</a>
+      <h1>选择入库类型</h1>
+    </div>
+    
+    <!-- 类型选择列表 -->
+    <div class="type-select-list">
+      <label class="type-select-item">
+        <input type="radio" name="stockInType" value="purchase" class="type-radio">
+        <div class="type-content">
+          <div class="type-icon purchase">🛒</div>
+          <div class="type-info">
+            <div class="type-title">采购入库</div>
+            <div class="type-desc">从供应商采购饲料、药品等物资入库</div>
+          </div>
+        </div>
+        <div class="type-check"></div>
+      </label>
+      
+      <label class="type-select-item">
+        <input type="radio" name="stockInType" value="transfer" class="type-radio">
+        <div class="type-content">
+          <div class="type-icon transfer">🔄</div>
+          <div class="type-info">
+            <div class="type-title">生产转入</div>
+            <div class="type-desc">从捕捞记录转入成品鱼入库</div>
+          </div>
+        </div>
+        <div class="type-check"></div>
+      </label>
+    </div>
+    
+    <!-- 捕捞记录选择（生产转入时显示） -->
+    <div class="section-title" id="fishingSectionTitle" style="display:none;">选择捕捞记录</div>
+    <div class="fishing-list" id="fishingList" style="display:none;">
+      <label class="fishing-item">
+        <input type="radio" name="fishingRecord" value="FISH202401150001" class="fishing-radio">
+        <div class="fishing-content">
+          <div class="fishing-header">
+            <span class="fishing-no">捕捞单号：FISH202401150001</span>
+            <span class="fishing-status">已质检</span>
+          </div>
+          <div class="fishing-info">
+            <div class="fishing-row">
+              <span class="fishing-label">基地：</span>
+              <span class="fishing-value">千岛湖基地A区</span>
+            </div>
+            <div class="fishing-row">
+              <span class="fishing-label">品种：</span>
+              <span class="fishing-value">有机草鱼</span>
+            </div>
+            <div class="fishing-row">
+              <span class="fishing-label">数量：</span>
+              <span class="fishing-value highlight">500尾</span>
+            </div>
+            <div class="fishing-row">
+              <span class="fishing-label">捕捞时间：</span>
+              <span class="fishing-value">2024-01-15 08:30</span>
+            </div>
+          </div>
+        </div>
+      </label>
+      
+      <label class="fishing-item">
+        <input type="radio" name="fishingRecord" value="FISH202401140002" class="fishing-radio">
+        <div class="fishing-content">
+          <div class="fishing-header">
+            <span class="fishing-no">捕捞单号：FISH202401140002</span>
+            <span class="fishing-status">已质检</span>
+          </div>
+          <div class="fishing-info">
+            <div class="fishing-row">
+              <span class="fishing-label">基地：</span>
+              <span class="fishing-value">千岛湖基地B区</span>
+            </div>
+            <div class="fishing-row">
+              <span class="fishing-label">品种：</span>
+              <span class="fishing-value">有机鲤鱼</span>
+            </div>
+            <div class="fishing-row">
+              <span class="fishing-label">数量：</span>
+              <span class="fishing-value highlight">800尾</span>
+            </div>
+            <div class="fishing-row">
+              <span class="fishing-label">捕捞时间：</span>
+              <span class="fishing-value">2024-01-14 09:00</span>
+            </div>
+          </div>
+        </div>
+      </label>
+    </div>
+  </div>
+  
+  <!-- 底部操作栏 -->
+  <div class="bottom-bar">
+    <button class="btn btn-default" onclick="history.back()">取消</button>
+    <button class="btn btn-primary" onclick="nextStep()">下一步</button>
+  </div>
+  
+  <script>
+    // 监听入库类型选择
+    document.querySelectorAll('input[name="stockInType"]').forEach(radio => {
+      radio.addEventListener('change', function() {
+        const fishingSection = document.getElementById('fishingSectionTitle');
+        const fishingList = document.getElementById('fishingList');
+        
+        if (this.value === 'transfer') {
+          fishingSection.style.display = 'block';
+          fishingList.style.display = 'block';
+        } else {
+          fishingSection.style.display = 'none';
+          fishingList.style.display = 'none';
+          // 清除捕捞记录选择
+          document.querySelectorAll('input[name="fishingRecord"]').forEach(r => r.checked = false);
+        }
+      });
+    });
+    
+    function nextStep() {
+      const typeSelected = document.querySelector('input[name="stockInType"]:checked');
+      
+      if (!typeSelected) {
+        alert('请选择入库类型');
+        return;
+      }
+      
+      const type = typeSelected.value;
+      
+      if (type === 'purchase') {
+        // 采购入库 - 直接进入详情页
+        window.location.href = 'stock-in-purchase.html';
+      } else if (type === 'transfer') {
+        // 生产转入 - 需要选择捕捞记录
+        const fishingSelected = document.querySelector('input[name="fishingRecord"]:checked');
+        if (!fishingSelected) {
+          alert('请选择捕捞记录');
+          return;
+        }
+        window.location.href = 'stock-in-transfer.html?fishingId=' + fishingSelected.value;
+      }
+    }
+  </script>
+</body>
+</html>
