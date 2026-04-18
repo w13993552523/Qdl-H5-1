@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>养殖详情</title>
+  <link rel="stylesheet" href="../css/common.css">
+  <style>
+    .container {
+      min-height: 100vh;
+      background: #f5f5f5;
+      padding-bottom: 100px;
+    }
+
+    /* 页面标题 */
+    .page-header {
+      background: #fff;
+      padding: 16px 20px;
+      border-bottom: 1px solid #f0f0f0;
+      display: flex;
+      align-items: center;
+    }
+
+    .back-btn {
+      font-size: 24px;
+      color: #666;
+      text-decoration: none;
+      margin-right: 12px;
+    }
+
+    .page-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    /* 状态卡片 */
+    .status-card {
+      background: #fff;
+      margin: 12px;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .status-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .pond-badge {
+      font-size: 24px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .status-badge {
+      font-size: 14px;
+      padding: 6px 14px;
+      border-radius: 6px;
+    }
+
+    .status-good {
+      background: #f6ffed;
+      color: #52c41a;
+    }
+
+    .status-warning {
+      background: #fff7e6;
+      color: #fa8c16;
+    }
+
+    .status-body {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .status-item {
+      text-align: center;
+      flex: 1;
+    }
+
+    .status-label {
+      display: block;
+      font-size: 14px;
+      color: #999;
+      margin-bottom: 6px;
+    }
+
+    .status-value {
+      font-size: 20px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .status-value.highlight {
+      color: #1890ff;
+    }
+
+    /* 详情区域 */
+    .detail-section {
+      background: #fff;
+      margin: 12px;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .detail-list {
+      padding: 0 4px;
+    }
+
+    .detail-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid #f5f5f5;
+    }
+
+    .detail-item:last-child {
+      border-bottom: none;
+    }
+
+    .detail-label {
+      font-size: 15px;
+      color: #666;
+    }
+
+    .detail-value {
+      font-size: 15px;
+      color: #333;
+      font-weight: 500;
+    }
+
+    /* 表单区域 */
+    .form-section {
+      background: #fff;
+      margin: 12px;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .form-list {
+      padding: 0 4px;
+    }
+
+    .form-item {
+      margin-bottom: 20px;
+    }
+
+    .form-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 15px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .form-label.required::after {
+      content: '*';
+      color: #ff4d4f;
+      margin-left: 4px;
+    }
+
+    .form-select {
+      width: 100%;
+      padding: 14px 16px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      font-size: 15px;
+      color: #333;
+      border: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23999' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+    }
+
+    .form-select:invalid {
+      color: #999;
+    }
+
+    .form-item input[type="text"],
+    .form-item input[type="date"] {
+      width: 100%;
+      padding: 14px 16px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      font-size: 15px;
+      color: #333;
+      border: none;
+      box-sizing: border-box;
+    }
+
+    .form-item textarea {
+      width: 100%;
+      height: 100px;
+      padding: 14px 16px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      font-size: 15px;
+      color: #333;
+      border: none;
+      box-sizing: border-box;
+      resize: none;
+    }
+
+    .textarea-item {
+      position: relative;
+    }
+
+    .char-count {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      font-size: 12px;
+      color: #999;
+    }
+
+    /* 单选组 */
+    .radio-group {
+      display: flex;
+      gap: 12px;
+    }
+
+    .radio-item {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      font-size: 15px;
+      color: #666;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+
+    .radio-item.active {
+      background: #e6f7ff;
+      color: #1890ff;
+      border-color: #1890ff;
+    }
+
+    .radio-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      margin-right: 8px;
+    }
+
+    /* 操作栏 */
+    .action-bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      gap: 12px;
+      padding: 16px 20px;
+      background: #fff;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    .btn {
+      flex: 1;
+      height: 48px;
+      line-height: 48px;
+      text-align: center;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-default {
+      background: #f5f5f5;
+      color: #666;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #1890ff 0%, #36cfc9 100%);
+      color: #fff;
+    }
+
+    .btn:active {
+      opacity: 0.8;
+    }
+
+    /* 底部导航 */
+    .tab-bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      background: #fff;
+      border-top: 1px solid #f0f0f0;
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .tab-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px 0;
+      text-decoration: none;
+      color: #999;
+    }
+
+    .tab-item.active {
+      color: #1890ff;
+    }
+
+    .tab-icon {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+
+    .tab-text {
+      font-size: 11px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 页面标题 -->
+    <div class="page-header">
+      <a href="breeding-list.html" class="back-btn">‹</a>
+      <div class="page-title" id="pageTitle">养殖详情</div>
+    </div>
+
+    <!-- 详情模式 -->
+    <div id="viewMode">
+      <!-- 状态卡片 -->
+      <div class="status-card">
+        <div class="status-header">
+          <div class="pond-badge" id="viewPond">-</div>
+          <div class="status-badge" id="viewHealthStatus">-</div>
+        </div>
+        <div class="status-body">
+          <div class="status-item">
+            <span class="status-label">品种</span>
+            <span class="status-value" id="viewSpecies">-</span>
+          </div>
+          <div class="status-item">
+            <span class="status-label">养殖天数</span>
+            <span class="status-value highlight" id="viewDays">-</span>
+          </div>
+          <div class="status-item">
+            <span class="status-label">生长阶段</span>
+            <span class="status-value" id="viewStage">-</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 基本信息 -->
+      <div class="detail-section">
+        <div class="section-title">基本信息</div>
+        <div class="detail-list">
+          <div class="detail-item">
+            <span class="detail-label">基地</span>
+            <span class="detail-value" id="viewBase">-</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">车间</span>
+            <span class="detail-value" id="viewWorkshop">-</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">池塘</span>
+            <span class="detail-value" id="viewPondName">-</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">投苗日期</span>
+            <span class="detail-value" id="viewStartDate">-</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">负责人</span>
+            <span class="detail-value" id="viewOperator">-</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">更新时间</span>
+            <span class="detail-value" id="viewUpdateTime">-</span>
+          </div>
+          <div class="detail-item" id="viewRemarkRow" style="display: none;">
+            <span class="detail-label">备注</span>
+            <span class="detail-value" id="viewRemark">-</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 操作按钮 -->
+      <div class="action-bar">
+        <button class="btn btn-default" onclick="goBack()">返回</button>
+        <button class="btn btn-primary" onclick="editRecord()">编辑</button>
+      </div>
+    </div>
+
+    <!-- 编辑/新增模式 -->
+    <div id="editMode" style="display: none;">
+      <div class="form-section">
+        <div class="section-title">基本信息</div>
+        <div class="form-list">
+          <!-- 基地 -->
+          <div class="form-item">
+            <label class="form-label required">基地</label>
+            <select class="form-select" id="baseSelect" required>
+              <option value="">请选择基地</option>
+              <option value="千岛湖基地A区">千岛湖基地A区</option>
+              <option value="千岛湖基地B区">千岛湖基地B区</option>
+            </select>
+          </div>
+
+          <!-- 车间 -->
+          <div class="form-item">
+            <label class="form-label required">车间</label>
+            <select class="form-select" id="workshopSelect" required>
+              <option value="">请选择车间</option>
+              <option value="1号车间">1号车间</option>
+              <option value="2号车间">2号车间</option>
+              <option value="3号车间">3号车间</option>
+            </select>
+          </div>
+
+          <!-- 池塘 -->
+          <div class="form-item">
+            <label class="form-label required">池塘</label>
+            <select class="form-select" id="pondSelect" required>
+              <option value="">请选择池塘</option>
+              <option value="1号池">1号池</option>
+              <option value="2号池">2号池</option>
+              <option value="3号池">3号池</option>
+              <option value="4号池">4号池</option>
+              <option value="5号池">5号池</option>
+            </select>
+          </div>
+
+          <!-- 品种 -->
+          <div class="form-item">
+            <label class="form-label required">品种</label>
+            <select class="form-select" id="speciesSelect" required>
+              <option value="">请选择品种</option>
+              <option value="鳙鱼">鳙鱼</option>
+              <option value="鲢鱼">鲢鱼</option>
+              <option value="草鱼">草鱼</option>
+              <option value="鲫鱼">鲫鱼</option>
+              <option value="鲤鱼">鲤鱼</option>
+            </select>
+          </div>
+
+          <!-- 投苗日期 -->
+          <div class="form-item">
+            <label class="form-label required">投苗日期</label>
+            <input type="date" id="startDate" required>
+          </div>
+
+          <!-- 生长阶段 -->
+          <div class="form-item">
+            <label class="form-label required">生长阶段</label>
+            <select class="form-select" id="stageSelect" required>
+              <option value="">请选择阶段</option>
+              <option value="幼鱼期">幼鱼期</option>
+              <option value="成长期">成长期</option>
+              <option value="成熟期">成熟期</option>
+            </select>
+          </div>
+
+          <!-- 健康状态 -->
+          <div class="form-item">
+            <label class="form-label required">健康状态</label>
+            <div class="radio-group">
+              <div class="radio-item active" data-status="良好" onclick="setHealthStatus(this)">
+                <span class="radio-dot"></span>
+                <span>良好</span>
+              </div>
+              <div class="radio-item" data-status="一般" onclick="setHealthStatus(this)">
+                <span class="radio-dot"></span>
+                <span>一般</span>
+              </div>
+              <div class="radio-item" data-status="差" onclick="setHealthStatus(this)">
+                <span class="radio-dot"></span>
+                <span>差</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 负责人 -->
+          <div class="form-item">
+            <label class="form-label required">负责人</label>
+            <input type="text" id="operator" placeholder="请输入负责人姓名" required>
+          </div>
+
+          <!-- 备注 -->
+          <div class="form-item textarea-item">
+            <label class="form-label">备注</label>
+            <textarea id="remark" placeholder="请输入备注信息（选填）" maxlength="200"></textarea>
+            <span class="char-count"><span id="charCount">0</span>/200</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 操作按钮 -->
+      <div class="action-bar">
+        <button class="btn btn-default" onclick="cancelEdit()">取消</button>
+        <button class="btn btn-primary" onclick="saveRecord()">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let isAdd = false;
+    let isEdit = false;
+    let currentId = null;
+    let healthStatus = '良好';
+
+    // 模拟数据
+    const mockData = {
+      1: {
+        id: 1,
+        pond: '1号池',
+        species: '鳙鱼',
+        startDate: '2024-01-15',
+        days: 45,
+        stage: '成长期',
+        healthStatus: '良好',
+        operator: '张三',
+        updateTime: '2024-03-01 10:30',
+        remark: '鱼苗生长情况良好',
+        base: '千岛湖基地A区',
+        workshop: '1号车间'
+      },
+      2: {
+        id: 2,
+        pond: '2号池',
+        species: '鲢鱼',
+        startDate: '2024-01-20',
+        days: 40,
+        stage: '成长期',
+        healthStatus: '良好',
+        operator: '李四',
+        updateTime: '2024-03-01 09:15',
+        remark: '',
+        base: '千岛湖基地A区',
+        workshop: '1号车间'
+      },
+      3: {
+        id: 3,
+        pond: '3号池',
+        species: '草鱼',
+        startDate: '2024-02-05',
+        days: 25,
+        stage: '幼鱼期',
+        healthStatus: '一般',
+        operator: '王五',
+        updateTime: '2024-03-01 08:45',
+        remark: '需要加强观察',
+        base: '千岛湖基地B区',
+        workshop: '2号车间'
+      },
+      4: {
+        id: 4,
+        pond: '4号池',
+        species: '鲫鱼',
+        startDate: '2024-02-10',
+        days: 20,
+        stage: '幼鱼期',
+        healthStatus: '良好',
+        operator: '张三',
+        updateTime: '2024-02-28 16:20',
+        remark: '',
+        base: '千岛湖基地B区',
+        workshop: '2号车间'
+      }
+    };
+
+    // 页面加载
+    document.addEventListener('DOMContentLoaded', function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const mode = urlParams.get('mode');
+      currentId = urlParams.get('id');
+
+      // 设置今天为最大日期
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('startDate').setAttribute('max', today);
+
+      if (mode === 'add') {
+        isAdd = true;
+        document.getElementById('pageTitle').textContent = '新增养殖记录';
+        showEditMode();
+      } else if (mode === 'edit') {
+        isEdit = true;
+        document.getElementById('pageTitle').textContent = '编辑养殖记录';
+        loadDetail(currentId);
+        showEditMode();
+      } else {
+        loadDetail(currentId);
+        showViewMode();
+      }
+
+      // 字符计数
+      document.getElementById('remark').addEventListener('input', function() {
+        document.getElementById('charCount').textContent = this.value.length;
+      });
+    });
+
+    // 加载详情
+    function loadDetail(id) {
+      const data = mockData[id];
+      if (!data) return;
+
+      // 查看模式
+      document.getElementById('viewPond').textContent = data.pond;
+      document.getElementById('viewSpecies').textContent = data.species;
+      document.getElementById('viewDays').textContent = data.days + '天';
+      document.getElementById('viewStage').textContent = data.stage;
+      document.getElementById('viewBase').textContent = data.base || '-';
+      document.getElementById('viewWorkshop').textContent = data.workshop || '-';
+      document.getElementById('viewPondName').textContent = data.pond || '-';
+      document.getElementById('viewStartDate').textContent = data.startDate;
+      document.getElementById('viewOperator').textContent = data.operator;
+      document.getElementById('viewUpdateTime').textContent = data.updateTime;
+
+      const healthBadge = document.getElementById('viewHealthStatus');
+      healthBadge.textContent = data.healthStatus;
+      healthBadge.className = 'status-badge ' + (data.healthStatus === '良好' ? 'status-good' : 'status-warning');
+
+      if (data.remark) {
+        document.getElementById('viewRemark').textContent = data.remark;
+        document.getElementById('viewRemarkRow').style.display = 'flex';
+      }
+
+      // 编辑模式
+      document.getElementById('pondSelect').value = data.pond;
+      document.getElementById('speciesSelect').value = data.species;
+      document.getElementById('startDate').value = data.startDate;
+      document.getElementById('stageSelect').value = data.stage;
+      document.getElementById('operator').value = data.operator;
+      document.getElementById('remark').value = data.remark || '';
+      document.getElementById('charCount').textContent = (data.remark || '').length;
+      document.getElementById('baseSelect').value = data.base || '';
+      document.getElementById('workshopSelect').value = data.workshop || '';
+
+      healthStatus = data.healthStatus;
+      updateHealthStatusUI();
+    }
+
+    // 显示查看模式
+    function showViewMode() {
+      document.getElementById('viewMode').style.display = 'block';
+      document.getElementById('editMode').style.display = 'none';
+    }
+
+    // 显示编辑模式
+    function showEditMode() {
+      document.getElementById('viewMode').style.display = 'none';
+      document.getElementById('editMode').style.display = 'block';
+    }
+
+    // 设置健康状态
+    function setHealthStatus(element) {
+      healthStatus = element.dataset.status;
+      updateHealthStatusUI();
+    }
+
+    // 更新健康状态UI
+    function updateHealthStatusUI() {
+      document.querySelectorAll('.radio-item').forEach(item => {
+        if (item.dataset.status === healthStatus) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+    }
+
+    // 返回
+    function goBack() {
+      window.history.back();
+    }
+
+    // 编辑
+    function editRecord() {
+      isEdit = true;
+      document.getElementById('pageTitle').textContent = '编辑养殖记录';
+      showEditMode();
+    }
+
+    // 取消编辑
+    function cancelEdit() {
+      if (isAdd) {
+        goBack();
+      } else {
+        isEdit = false;
+        document.getElementById('pageTitle').textContent = '养殖详情';
+        showViewMode();
+      }
+    }
+
+    // 保存
+    function saveRecord() {
+      const base = document.getElementById('baseSelect').value;
+      const workshop = document.getElementById('workshopSelect').value;
+      const pond = document.getElementById('pondSelect').value;
+      const species = document.getElementById('speciesSelect').value;
+      const startDate = document.getElementById('startDate').value;
+      const stage = document.getElementById('stageSelect').value;
+      const operator = document.getElementById('operator').value;
+      const remark = document.getElementById('remark').value;
+
+      // 表单校验
+      if (!base) {
+        alert('请选择基地');
+        return;
+      }
+      if (!workshop) {
+        alert('请选择车间');
+        return;
+      }
+        alert('请选择池塘');
+        return;
+      }
+      if (!species) {
+        alert('请选择品种');
+        return;
+      }
+      if (!startDate) {
+        alert('请选择投苗日期');
+        return;
+      }
+      if (!stage) {
+        alert('请选择生长阶段');
+        return;
+      }
+      if (!operator) {
+        alert('请输入负责人');
+        return;
+      }
+
+      // 计算养殖天数
+      const start = new Date(startDate);
+      const now = new Date();
+      const days = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+
+      // 模拟保存
+      alert(isAdd ? '新增成功' : '保存成功');
+      window.location.href = 'breeding-list.html';
+    }
+  </script>
+</body>
+</html>

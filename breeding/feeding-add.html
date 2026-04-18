@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>新增投喂</title>
+  <link rel="stylesheet" href="../css/common.css">
+  <style>
+    .page-header {
+      background: #52c41a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin: -16px -16px 16px -16px;
+      padding: 16px;
+    }
+    .back-btn {
+      position: absolute;
+      left: 16px;
+      color: #fff;
+      font-size: 28px;
+      text-decoration: none;
+    }
+    .page-header h1 {
+      color: #fff;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .form-section {
+      background: #fff;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .section-title {
+      padding: 12px 16px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #333;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .form-item {
+      display: flex;
+      align-items: center;
+      padding: 14px 16px;
+      border-bottom: 1px solid #f5f5f5;
+    }
+    .form-item:last-child {
+      border-bottom: none;
+    }
+    .form-label {
+      width: 100px;
+      font-size: 15px;
+      color: #333;
+    }
+    .form-label .required {
+      color: #ff4d4f;
+    }
+    .form-input, .form-select {
+      flex: 1;
+      border: none;
+      text-align: right;
+      font-size: 15px;
+      color: #333;
+      outline: none;
+      background: transparent;
+    }
+    .form-input::placeholder {
+      color: #bbb;
+    }
+    .form-arrow {
+      color: #ccc;
+      margin-left: 8px;
+    }
+    .upload-box { padding: 16px; }
+    .upload-area { border: 2px dashed #d9f7be; border-radius: 8px; padding: 30px 16px; text-align: center; cursor: pointer; }
+    .upload-placeholder { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .upload-icon { font-size: 32px; }
+    .upload-text { font-size: 15px; color: #333; }
+    .upload-tip { font-size: 12px; color: #999; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 页面标题 -->
+    <div class="page-header">
+      <a href="feeding.html" class="back-btn">‹</a>
+      <h1>新增投喂</h1>
+    </div>
+    
+    <!-- 基本信息 -->
+    <div class="form-section">
+      <div class="section-title">基本信息</div>
+      <div class="form-item">
+        <span class="form-label"><span class="required">*</span> 选择投苗</span>
+        <select class="form-select">
+          <option>请选择投苗记录</option>
+          <option>TM202401001 - 1号池 - 鳙鱼</option>
+          <option>TM202401002 - 2号池 - 鲢鱼</option>
+          <option>TM202401003 - 3号池 - 草鱼</option>
+        </select>
+        <span class="form-arrow">›</span>
+      </div>
+      <div class="form-item">
+        <span class="form-label"><span class="required">*</span> 投喂日期</span>
+        <input type="date" class="form-input" id="feedingDate">
+      </div>
+      <div class="form-item">
+        <span class="form-label"><span class="required">*</span> 投喂时间</span>
+        <input type="time" class="form-input" id="feedingTime">
+      </div>
+    </div>
+    
+    <!-- 投喂信息 -->
+    <div class="form-section">
+      <div class="section-title">投喂信息</div>
+      <div class="form-item">
+        <span class="form-label"><span class="required">*</span> 投喂物料</span>
+        <select class="form-select">
+          <option>请选择饲料</option>
+          <option>颗粒饲料</option>
+          <option>浮性饲料</option>
+          <option>沉性饲料</option>
+        </select>
+        <span class="form-arrow">›</span>
+      </div>
+      <div class="form-item">
+        <span class="form-label"><span class="required">*</span> 投喂数量</span>
+        <input type="number" class="form-input" placeholder="请输入数量">
+      </div>
+    </div>
+    
+    <!-- 其他信息 -->
+    <div class="form-section">
+      <div class="section-title">其他信息</div>
+      <div class="form-item">
+        <span class="form-label"><span class="required">*</span> 操作人</span>
+        <input type="text" class="form-input" placeholder="请输入操作人">
+      </div>
+      <div class="form-item">
+        <span class="form-label">备注</span>
+        <input type="text" class="form-input" placeholder="请输入备注">
+      </div>
+    </div>
+
+    <!-- 在线图片 -->
+    <div class="form-section">
+      <div class="section-title required">在线图片</div>
+      <div class="upload-box">
+        <input type="file" id="imageUpload" accept="image/*" style="display:none;">
+        <div class="upload-area" onclick="document.getElementById('imageUpload').click()">
+          <div class="upload-placeholder">
+            <span class="upload-icon">📷</span>
+            <span class="upload-text">点击上传图片</span>
+            <span class="upload-tip">支持jpg/png，最大10MB</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 底部操作栏 -->
+  <div class="bottom-bar">
+    <button class="btn btn-default" onclick="history.back()">取消</button>
+    <button class="btn btn-primary">保存</button>
+  </div>
+
+  <script>
+    const now = new Date();
+    document.getElementById('feedingDate').value = now.toISOString().split('T')[0];
+    document.getElementById('feedingTime').value = now.toTimeString().slice(0,5);
+  </script>
+</body>
+</html>

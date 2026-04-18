@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>捕捞管理</title>
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/stock-out-list.css">
+  <style>
+    .page-header {
+      background: #722ed1;
+    }
+    .record-type {
+      color: #722ed1;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 页面标题 -->
+    <div class="page-header">
+      <a href="index.html" class="back-btn">‹</a>
+      <h1>捕捞管理</h1>
+    </div>
+    
+    <!-- 捕捞记录列表 -->
+    <div class="record-list">
+      <a href="fishing-detail.html?id=1" class="record-item">
+        <div class="record-header">
+          <span class="record-type">BL202401001</span>
+          <span class="record-status status-success">已完成</span>
+        </div>
+        <div class="record-body">
+          <div class="record-info">
+            <span class="record-label">池塘：</span>
+            <span class="record-value">1号池</span>
+          </div>
+          <div class="record-info">
+            <span class="record-label">鱼种：</span>
+            <span class="record-value">鳙鱼</span>
+          </div>
+          <div class="record-info">
+            <span class="record-label">捕捞数量：</span>
+            <span class="record-value">2,000kg</span>
+          </div>
+          <div class="record-info">
+            <span class="record-label">捕捞时间：</span>
+            <span class="record-value">08:30</span>
+          </div>
+        </div>
+        <div class="record-footer">
+          <span>2024-01-20</span>
+          <span>操作人：张三</span>
+        </div>
+      </a>
+      
+      <a href="fishing-detail.html?id=2" class="record-item">
+        <div class="record-header">
+          <span class="record-type">BL202401002</span>
+          <span class="record-status status-pending">新建</span>
+        </div>
+        <div class="record-body">
+          <div class="record-info">
+            <span class="record-label">池塘：</span>
+            <span class="record-value">2号池</span>
+          </div>
+          <div class="record-info">
+            <span class="record-label">鱼种：</span>
+            <span class="record-value">鲢鱼</span>
+          </div>
+          <div class="record-info">
+            <span class="record-label">捕捞数量：</span>
+            <span class="record-value">1,500kg</span>
+          </div>
+          <div class="record-info">
+            <span class="record-label">捕捞时间：</span>
+            <span class="record-value">09:00</span>
+          </div>
+        </div>
+        <div class="record-footer">
+          <span>2024-01-22</span>
+          <span>操作人：李四</span>
+        </div>
+      </a>
+    </div>
+  </div>
+  
+  <!-- 底部操作栏 -->
+  <div class="bottom-bar">
+    <a href="fishing-add.html" class="btn btn-primary btn-block">新增捕捞</a>
+  </div>
+</body>
+</html>

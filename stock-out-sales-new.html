@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>销售出库</title>
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/stock-form-new.css">
+  <style>
+    .trace-bind-section {
+      background: #fff;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .trace-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .trace-item:last-child {
+      border-bottom: none;
+    }
+    .trace-info {
+      flex: 1;
+    }
+    .trace-code {
+      font-family: monospace;
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 4px;
+    }
+    .trace-product {
+      font-size: 13px;
+      color: #666;
+    }
+    .trace-quantity {
+      font-size: 14px;
+      color: #cf3a3a;
+      font-weight: 500;
+      margin-right: 12px;
+    }
+    .bind-btn {
+      padding: 6px 16px;
+      background: #cf3a3a;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .bind-btn:disabled {
+      background: #ccc;
+    }
+    .bind-status {
+      font-size: 13px;
+      color: #52c41a;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 页面标题 -->
+    <div class="page-header">
+      <a href="stock-out-type-select.html" class="back-btn">‹</a>
+      <h1>销售出库</h1>
+    </div>
+    
+    <!-- 表单 -->
+    <div class="form-section">
+      <div class="section-title">基本信息</div>
+      <div class="form-group">
+        <div class="form-item">
+          <span class="form-label required">关联养殖户</span>
+          <select class="form-select" id="breederSelect">
+            <option value="">请选择</option>
+            <option value="1" selected>千岛湖养殖户张三</option>
+          </select>
+          <span class="form-arrow">›</span>
+        </div>
+        <div class="form-item">
+          <span class="form-label required">基地名称</span>
+          <select class="form-select" id="baseSelect">
+            <option value="">请选择</option>
+            <option value="1" selected>千岛湖基地A区</option>
+          </select>
+          <span class="form-arrow">›</span>
+        </div>
+        <div class="form-item">
+          <span class="form-label">出库类型</span>
+          <input type="text" class="form-input" value="销售出库" readonly disabled>
+        </div>
+        <div class="form-item">
+          <span class="form-label">关联表单</span>
+          <a href="#" class="form-link">RK202401150001</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-section">
+      <div class="section-title">出库主体</div>
+      <div class="form-group">
+        <div class="form-item">
+          <span class="form-label">出库主体</span>
+          <input type="text" class="form-input" value="有机草鱼" readonly disabled>
+        </div>
+        <div class="form-item">
+          <span class="form-label">养殖天数</span>
+          <input type="number" class="form-input" value="548" readonly disabled>
+          <span class="form-unit">天</span>
+        </div>
+        <div class="form-item">
+          <span class="form-label required">产品等级</span>
+          <select class="form-select" id="productGradeSelect">
+            <option value="">请选择</option>
+            <option value="premium" selected>优等</option>
+            <option value="first">一等</option>
+            <option value="second">二等</option>
+            <option value="ordinary">普通</option>
+          </select>
+          <span class="form-arrow">›</span>
+        </div>
+        <div class="form-item">
+          <span class="form-label required">品牌</span>
+          <select class="form-select" id="brandSelect">
+            <option value="">请选择品牌</option>
+            <option value="1">千岛有机鱼</option>
+            <option value="2">千岛湖生态鱼</option>
+            <option value="3">千岛野生鱼</option>
+          </select>
+          <span class="form-arrow">›</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-section">
+      <div class="section-title">出库信息</div>
+      <div class="form-group">
+        <div class="form-item">
+          <span class="form-label required">出库时间</span>
+          <input type="datetime-local" class="form-input" id="outTime" required>
+        </div>
+        <div class="form-item">
+          <span class="form-label">出库数量</span>
+          <input type="text" class="form-input" value="500尾" readonly disabled>
+        </div>
+        <div class="form-item">
+          <span class="form-label required">操作人</span>
+          <input type="text" class="form-input" id="operator" placeholder="请输入操作人姓名" maxlength="50">
+        </div>
+        <div class="form-item textarea-item">
+          <span class="form-label">备注说明</span>
+          <textarea class="form-textarea" id="remark" placeholder="请输入备注信息（选填，最多200字）" maxlength="200"></textarea>
+          <div class="char-count"><span id="remarkCount">0</span>/200</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 溯源码绑定 -->
+    <div class="section-title">溯源码绑定</div>
+    <div class="trace-bind-section">
+      <div class="trace-item">
+        <div class="trace-info">
+          <div class="trace-code">QS202401150001</div>
+          <div class="trace-product">有机草鱼</div>
+        </div>
+        <span class="trace-quantity">500尾</span>
+        <button class="bind-btn" onclick="bindTrace(this)">绑定</button>
+        <span class="bind-status">✓ 已绑定</span>
+      </div>
+      <div class="trace-item">
+        <div class="trace-info">
+          <div class="trace-code">QS202401150002</div>
+          <div class="trace-product">有机草鱼</div>
+        </div>
+        <span class="trace-quantity">300尾</span>
+        <button class="bind-btn" onclick="bindTrace(this)">绑定</button>
+        <span class="bind-status">✓ 已绑定</span>
+      </div>
+    </div>
+    
+    <!-- 图片上传 -->
+    <div class="form-section">
+      <div class="section-title required">在线图片</div>
+      <div class="upload-box">
+        <input type="file" id="imageUpload" accept="image/*" style="display:none;" required>
+        <div class="upload-area" onclick="document.getElementById('imageUpload').click()">
+          <div class="upload-placeholder" id="uploadPlaceholder">
+            <span class="upload-icon">📷</span>
+            <span class="upload-text">点击上传图片</span>
+            <span class="upload-tip">支持jpg/png，最大10MB</span>
+          </div>
+          <img class="upload-preview" id="uploadPreview" style="display:none;">
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 底部操作栏 -->
+  <div class="bottom-bar">
+    <button class="btn btn-default" onclick="history.back()">取消</button>
+    <button class="btn btn-primary" onclick="submitForm()">确认出库</button>
+  </div>
+  
+  <script>
+    // 设置默认时间为当前时间
+    const now = new Date();
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+    document.getElementById('outTime').value = now.toISOString().slice(0, 16);
+    
+    // 限制不能选择未来时间
+    document.getElementById('outTime').setAttribute('max', now.toISOString().slice(0, 16));
+    
+    // 字符计数
+    document.getElementById('remark').addEventListener('input', function() {
+      document.getElementById('remarkCount').textContent = this.value.length;
+    });
+    
+    // 图片上传预览
+    document.getElementById('imageUpload').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        if (file.size > 10 * 1024 * 1024) {
+          alert('图片大小不能超过10MB');
+          this.value = '';
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('uploadPreview').src = e.target.result;
+          document.getElementById('uploadPreview').style.display = 'block';
+          document.getElementById('uploadPlaceholder').style.display = 'none';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+    
+    // 溯源码绑定
+    function bindTrace(btn) {
+      if (confirm('确认绑定此溯源码？')) {
+        btn.style.display = 'none';
+        btn.nextElementSibling.style.display = 'block';
+        alert('已完成线上绑定');
+      }
+    }
+    
+    function submitForm() {
+      // 必填校验
+      const breeder = document.getElementById('breederSelect').value;
+      const base = document.getElementById('baseSelect').value;
+      const brand = document.getElementById('brandSelect').value;
+      const outTime = document.getElementById('outTime').value;
+      const operator = document.getElementById('operator').value;
+      const image = document.getElementById('imageUpload').files[0];
+      
+      if (!breeder) {
+        alert('请选择关联养殖户');
+        return;
+      }
+      if (!base) {
+        alert('请选择基地名称');
+        return;
+      }
+      if (!brand) {
+        alert('请选择品牌');
+        return;
+      }
+      if (!outTime) {
+        alert('请选择出库时间');
+        return;
+      }
+      if (!operator) {
+        alert('请输入操作人');
+        return;
+      }
+      if (!image) {
+        alert('请上传图片');
+        return;
+      }
+      
+      alert('销售出库成功！');
+      window.location.href = 'stock-out-list.html';
+    }
+  </script>
+</body>
+</html>

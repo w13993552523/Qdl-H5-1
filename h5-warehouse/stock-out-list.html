@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>出库管理</title>
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/stock-out-list.css">
+</head>
+<body>
+  <div class="container">
+    <!-- 页面标题 -->
+    <div class="page-header">
+      <a href="index.html" class="back-btn">‹</a>
+      <h1>出库管理</h1>
+    </div>
+    
+    <!-- 出库记录列表 -->
+    <div class="record-list">
+      <a href="stock-out-detail.html?id=1" class="record-item">
+        <div class="record-header">
+          <span class="record-type">养殖领用</span>
+          <span class="record-status status-success">已完成</span>
+        </div>
+        <div class="record-body">
+          <div class="record-info">
+            <span class="record-label">出库基地：</span>
+            <span class="record-value">千岛湖基地A区</span>
+          </div>
+          <div class="record-info">
+            <span class="record-label">领用物品：</span>
+            <span class="record-value">草鱼饲料 500kg</span>
+          </div>
+          <div class="record-info">
+            <span class="record-label">领用人：</span>
+            <span class="record-value">张三</span>
+          </div>
+        </div>
+        <div class="record-footer">
+          <span class="record-time">2024-01-15 10:30</span>
+          <span class="record-creator">创建人：李四</span>
+        </div>
+      </a>
+      
+      <a href="stock-out-detail.html?id=2" class="record-item">
+        <div class="record-header">
+          <span class="record-type type-sales">销售出库</span>
+          <span class="record-status status-success">已完成</span>
+        </div>
+        <div class="record-body">
+          <div class="record-info">
+            <span class="record-label">出库基地：</span>
+            <span class="record-value">千岛湖基地B区</span>
+          </div>
+          <div class="record-info">
+            <span class="record-label">销售品牌：</span>
+            <span class="record-value">千岛有机鱼</span>
+          </div>
+          <div class="record-info">
+            <span class="record-label">买家：</span>
+            <span class="record-value">杭州XX商贸有限公司</span>
+          </div>
+        </div>
+        <div class="record-footer">
+          <span class="record-time">2024-01-14 14:20</span>
+          <span class="record-creator">创建人：王五</span>
+        </div>
+      </a>
+      
+      <a href="stock-out-detail.html?id=3" class="record-item">
+        <div class="record-header">
+          <span class="record-type">养殖领用</span>
+          <span class="record-status status-pending">待审核</span>
+        </div>
+        <div class="record-body">
+          <div class="record-info">
+            <span class="record-label">出库基地：</span>
+            <span class="record-value">千岛湖基地C区</span>
+          </div>
+          <div class="record-info">
+            <span class="record-label">领用物品：</span>
+            <span class="record-value">鱼药-消毒剂 20L</span>
+          </div>
+          <div class="record-info">
+            <span class="record-label">领用人：</span>
+            <span class="record-value">赵六</span>
+          </div>
+        </div>
+        <div class="record-footer">
+          <span class="record-time">2024-01-13 09:15</span>
+          <span class="record-creator">创建人：李四</span>
+        </div>
+      </a>
+    </div>
+  </div>
+  
+  <!-- 底部操作栏 -->
+  <div class="bottom-bar">
+    <a href="stock-out-type-select.html" class="btn btn-primary btn-block">新增出库</a>
+  </div>
+  
+  <!-- 底部导航 -->
+  <div class="tab-bar">
+    <a href="index.html" class="tab-item">
+      <div class="tab-icon">📦</div>
+      <div class="tab-text">仓储</div>
+    </a>
+    <a href="breeding/index.html" class="tab-item">
+      <div class="tab-icon">🐟</div>
+      <div class="tab-text">养殖</div>
+    </a>
+    <a href="profile.html" class="tab-item">
+      <div class="tab-icon">👤</div>
+      <div class="tab-text">我的</div>
+    </a>
+  </div>
+</body>
+</html>

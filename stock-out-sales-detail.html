@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>销售出库详情</title>
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/stock-detail.css">
+  <style>
+    .trace-bind-section {
+      background: #fff;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+    .trace-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .trace-item:last-child { border-bottom: none; }
+    .trace-info { flex: 1; }
+    .trace-code {
+      font-family: monospace;
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 4px;
+    }
+    .trace-product { font-size: 13px; color: #666; }
+    .trace-quantity {
+      font-size: 14px;
+      color: #cf3a3a;
+      font-weight: 500;
+      margin-right: 12px;
+    }
+    .bind-status {
+      font-size: 13px;
+      color: #52c41a;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 页面标题 -->
+    <div class="page-header">
+      <a href="stock-out-list.html" class="back-btn">‹</a>
+      <h1>销售出库详情</h1>
+    </div>
+
+    <!-- 基本信息 -->
+    <div class="detail-section">
+      <div class="section-header">
+        <span class="section-icon">📋</span>
+        <span class="section-title">基本信息</span>
+      </div>
+      <div class="detail-list">
+        <div class="detail-item">
+          <span class="detail-label">出库单号</span>
+          <span class="detail-value">XS202401150001</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">关联养殖户</span>
+          <span class="detail-value">千岛湖养殖户张三</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">基地名称</span>
+          <span class="detail-value">千岛湖基地A区</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">出库类型</span>
+          <span class="detail-value"><span class="type-tag tag-sales">销售出库</span></span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">关联表单</span>
+          <span class="detail-value">RK202401150001</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 出库主体 -->
+    <div class="detail-section">
+      <div class="section-header">
+        <span class="section-icon">🐟</span>
+        <span class="section-title">出库主体</span>
+      </div>
+      <div class="detail-list">
+        <div class="detail-item">
+          <span class="detail-label">出库主体</span>
+          <span class="detail-value highlight">有机草鱼</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">养殖天数</span>
+          <span class="detail-value">548 天</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">产品等级</span>
+          <span class="detail-value"><span class="status-tag tag-normal">优等</span></span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">品牌</span>
+          <span class="detail-value">千岛有机鱼</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 出库信息 -->
+    <div class="detail-section">
+      <div class="section-header">
+        <span class="section-icon">📤</span>
+        <span class="section-title">出库信息</span>
+      </div>
+      <div class="detail-list">
+        <div class="detail-item">
+          <span class="detail-label">出库时间</span>
+          <span class="detail-value">2024-01-14 14:20</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">出库数量</span>
+          <span class="detail-value highlight">500 尾</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 溯源码绑定 -->
+    <div class="detail-section">
+      <div class="section-header">
+        <span class="section-icon">🔍</span>
+        <span class="section-title">溯源码绑定</span>
+      </div>
+      <div class="trace-bind-section">
+        <div class="trace-item">
+          <div class="trace-info">
+            <div class="trace-code">QS202401150001</div>
+            <div class="trace-product">有机草鱼</div>
+          </div>
+          <span class="trace-quantity">500尾</span>
+          <span class="bind-status">✓ 已绑定</span>
+        </div>
+        <div class="trace-item">
+          <div class="trace-info">
+            <div class="trace-code">QS202401150002</div>
+            <div class="trace-product">有机草鱼</div>
+          </div>
+          <span class="trace-quantity">300尾</span>
+          <span class="bind-status">✓ 已绑定</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 其他信息 -->
+    <div class="detail-section">
+      <div class="section-header">
+        <span class="section-icon">⚙️</span>
+        <span class="section-title">其他信息</span>
+      </div>
+      <div class="detail-list">
+        <div class="detail-item">
+          <span class="detail-label">操作人</span>
+          <span class="detail-value">王五</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">备注说明</span>
+          <span class="detail-value">杭州XX商贸有限公司采购</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 在线图片 -->
+    <div class="detail-section">
+      <div class="section-header">
+        <span class="section-icon">📎</span>
+        <span class="section-title">在线图片</span>
+      </div>
+      <div class="image-section">
+        <div class="image-grid">
+          <div class="image-item"><img src="https://picsum.photos/200/200?random=93" alt="销售出库图片"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部导航 -->
+  <div class="tab-bar">
+    <a href="index.html" class="tab-item">
+      <div class="tab-icon">📦</div>
+      <div class="tab-text">仓储</div>
+    </a>
+    <a href="../breeding/index.html" class="tab-item">
+      <div class="tab-icon">🐟</div>
+      <div class="tab-text">养殖</div>
+    </a>
+    <a href="profile.html" class="tab-item">
+      <div class="tab-icon">👤</div>
+      <div class="tab-text">我的</div>
+    </a>
+  </div>
+</body>
+</html>

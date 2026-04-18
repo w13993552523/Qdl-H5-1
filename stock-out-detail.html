@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>出库详情</title>
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/stock-detail.css">
+</head>
+<body>
+  <div class="container">
+    <!-- 页面标题 -->
+    <div class="page-header">
+      <a href="stock-out-list.html" class="back-btn">‹</a>
+      <h1>出库详情</h1>
+    </div>
+    
+    <!-- 基本信息 -->
+    <div class="detail-section">
+      <div class="section-header">
+        <span class="section-icon">📋</span>
+        <span class="section-title">基本信息</span>
+      </div>
+      <div class="detail-list">
+        <div class="detail-item">
+          <span class="detail-label">出库单号</span>
+          <span class="detail-value">CK202401150001</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">出库类型</span>
+          <span class="detail-value">
+            <span class="type-tag tag-breeding">养殖领用</span>
+          </span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">出库基地</span>
+          <span class="detail-value">千岛湖基地A区</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">关联入库</span>
+          <span class="detail-value">RK202401100001</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">物品名称</span>
+          <span class="detail-value">草鱼饲料</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">出库数量</span>
+          <span class="detail-value highlight">150 kg</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">出库日期</span>
+          <span class="detail-value">2024-01-15</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">养殖日期</span>
+          <span class="detail-value" id="farmingDate" style="color:#999;">2023-06-15 至 2024-01-15（548天）</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">产品等级</span>
+          <select class="detail-select" id="productGrade">
+            <option value="">请选择</option>
+            <option value="premium" selected>优等</option>
+            <option value="first">一等</option>
+            <option value="second">二等</option>
+            <option value="ordinary">普通</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 溯源信息 -->
+    <div class="detail-section">
+      <div class="section-header">
+        <span class="section-icon">🔍</span>
+        <span class="section-title">溯源信息</span>
+      </div>
+      <div class="detail-list">
+        <div class="detail-item">
+          <span class="detail-label">溯源码</span>
+          <span class="detail-value trace-code">QS202401150001</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">绑定状态</span>
+          <span class="detail-value">
+            <span class="status-tag tag-normal">已绑定</span>
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 操作信息 -->
+    <div class="detail-section">
+      <div class="section-header">
+        <span class="section-icon">⚙️</span>
+        <span class="section-title">其他信息</span>
+      </div>
+      <div class="detail-list">
+        <div class="detail-item">
+          <span class="detail-label">创建人</span>
+          <span class="detail-value">李四</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">创建时间</span>
+          <span class="detail-value">2024-01-15 10:30:25</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">备注</span>
+          <span class="detail-value">-</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 在线图片 -->
+    <div class="detail-section">
+      <div class="section-header">
+        <span class="section-icon">📎</span>
+        <span class="section-title">在线图片</span>
+      </div>
+      <div class="image-section">
+        <div class="image-grid">
+          <div class="image-item"><img src="https://picsum.photos/200/200?random=91" alt="出库图片"></div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  
+  <!-- 底部导航 -->
+  <div class="tab-bar">
+    <a href="index.html" class="tab-item">
+      <div class="tab-icon">📦</div>
+      <div class="tab-text">仓储</div>
+    </a>
+    <a href="../breeding/index.html" class="tab-item">
+      <div class="tab-icon">🐟</div>
+      <div class="tab-text">养殖</div>
+    </a>
+    <a href="profile.html" class="tab-item">
+      <div class="tab-icon">👤</div>
+      <div class="tab-text">我的</div>
+    </a>
+  </div>
+</body>
+</html>

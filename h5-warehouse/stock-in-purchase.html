@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>采购入库</title>
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/stock-form-new.css">
+</head>
+<body>
+  <div class="container">
+    <!-- 页面标题 -->
+    <div class="page-header">
+      <a href="stock-in-type-select.html" class="back-btn">‹</a>
+      <h1>采购入库</h1>
+    </div>
+    
+    <!-- 表单 -->
+    <div class="form-section">
+      <div class="section-title">基本信息</div>
+      <div class="form-group">
+        <div class="form-item">
+          <span class="form-label required">关联养殖户</span>
+          <select class="form-select" id="breederSelect">
+            <option value="">请选择</option>
+            <option value="1" selected>千岛湖养殖户张三</option>
+          </select>
+          <span class="form-arrow">›</span>
+        </div>
+        <div class="form-item">
+          <span class="form-label required">基地名称</span>
+          <select class="form-select" id="baseSelect">
+            <option value="">请选择</option>
+            <option value="1" selected>千岛湖基地A区</option>
+          </select>
+          <span class="form-arrow">›</span>
+        </div>
+        <div class="form-item">
+          <span class="form-label">入库类型</span>
+          <input type="text" class="form-input" value="采购入库" readonly disabled>
+        </div>
+        <div class="form-item">
+          <span class="form-label">关联表单</span>
+          <input type="text" class="form-input" placeholder="-" readonly disabled>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-section">
+      <div class="section-title">入库主体</div>
+      <div class="form-group">
+        <div class="form-item">
+          <span class="form-label required">鱼种</span>
+          <select class="form-select" id="productSelect">
+            <option value="">请选择鱼种</option>
+            <option value="1">草鱼</option>
+            <option value="2">鲤鱼</option>
+            <option value="3">鲫鱼</option>
+            <option value="4">鳙鱼</option>
+          </select>
+          <span class="form-arrow">›</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-section">
+      <div class="section-title">入库信息</div>
+      <div class="form-group">
+        <div class="form-item">
+          <span class="form-label required">入库时间</span>
+          <input type="datetime-local" class="form-input" id="inTime" required>
+        </div>
+        <div class="form-item">
+          <span class="form-label required">入库数量</span>
+          <input type="number" class="form-input" id="inQuantity" placeholder="请输入正整数" min="1" step="1">
+          <span class="form-unit">尾</span>
+        </div>
+        <div class="form-item textarea-item">
+          <span class="form-label">备注说明</span>
+          <textarea class="form-textarea" id="remark" placeholder="请输入备注信息（选填，最多200字）" maxlength="200"></textarea>
+          <div class="char-count"><span id="remarkCount">0</span>/200</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 图片上传 -->
+    <div class="form-section">
+      <div class="section-title required">在线图片</div>
+      <div class="upload-box">
+        <input type="file" id="imageUpload" accept="image/*" style="display:none;" required>
+        <div class="upload-area" onclick="document.getElementById('imageUpload').click()">
+          <div class="upload-placeholder" id="uploadPlaceholder">
+            <span class="upload-icon">📷</span>
+            <span class="upload-text">点击上传图片</span>
+            <span class="upload-tip">支持jpg/png，最大10MB</span>
+          </div>
+          <img class="upload-preview" id="uploadPreview" style="display:none;">
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 底部操作栏 -->
+  <div class="bottom-bar">
+    <button class="btn btn-default" onclick="history.back()">取消</button>
+    <button class="btn btn-primary" onclick="submitForm()">确认入库</button>
+  </div>
+  
+  <script>
+    // 设置默认时间为当前时间
+    const now = new Date();
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+    document.getElementById('inTime').value = now.toISOString().slice(0, 16);
+    
+    // 限制不能选择未来时间
+    document.getElementById('inTime').setAttribute('max', now.toISOString().slice(0, 16));
+    
+    // 字符计数
+    document.getElementById('remark').addEventListener('input', function() {
+      document.getElementById('remarkCount').textContent = this.value.length;
+    });
+    
+    // 图片上传预览
+    document.getElementById('imageUpload').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        if (file.size > 10 * 1024 * 1024) {
+          alert('图片大小不能超过10MB');
+          this.value = '';
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('uploadPreview').src = e.target.result;
+          document.getElementById('uploadPreview').style.display = 'block';
+          document.getElementById('uploadPlaceholder').style.display = 'none';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+    
+    function submitForm() {
+      // 必填校验
+      const breeder = document.getElementById('breederSelect').value;
+      const base = document.getElementById('baseSelect').value;
+      const product = document.getElementById('productSelect').value;
+      const inTime = document.getElementById('inTime').value;
+      const quantity = document.getElementById('inQuantity').value;
+      const image = document.getElementById('imageUpload').files[0];
+      
+      if (!breeder) {
+        alert('请选择关联养殖户');
+        return;
+      }
+      if (!base) {
+        alert('请选择基地名称');
+        return;
+      }
+      if (!product) {
+        alert('请选择入库主体');
+        return;
+      }
+      if (!inTime) {
+        alert('请选择入库时间');
+        return;
+      }
+      if (!quantity || quantity < 1 || !Number.isInteger(Number(quantity))) {
+        alert('请输入有效的入库数量（正整数）');
+        return;
+      }
+      if (!image) {
+        alert('请上传图片');
+        return;
+      }
+      
+      alert('采购入库成功！');
+      window.location.href = 'stock-in-list.html';
+    }
+  </script>
+</body>
+</html>

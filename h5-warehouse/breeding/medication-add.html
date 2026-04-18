@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>新增投药</title>
+  <link rel="stylesheet" href="../css/common.css">
+  <style>
+    .page-header {
+      background: #ff4d4f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin: -16px -16px 16px -16px;
+      padding: 16px;
+    }
+    .back-btn {
+      position: absolute;
+      left: 16px;
+      color: #fff;
+      font-size: 28px;
+      text-decoration: none;
+    }
+    .page-header h1 {
+      color: #fff;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .form-section {
+      background: #fff;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .section-title {
+      padding: 12px 16px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #333;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .form-item {
+      display: flex;
+      align-items: center;
+      padding: 14px 16px;
+      border-bottom: 1px solid #f5f5f5;
+    }
+    .form-item:last-child {
+      border-bottom: none;
+    }
+    .form-label {
+      width: 100px;
+      font-size: 15px;
+      color: #333;
+    }
+    .form-label .required {
+      color: #ff4d4f;
+    }
+    .form-input, .form-select {
+      flex: 1;
+      border: none;
+      text-align: right;
+      font-size: 15px;
+      color: #333;
+      outline: none;
+      background: transparent;
+    }
+    .form-input::placeholder {
+      color: #bbb;
+    }
+    .form-arrow {
+      color: #ccc;
+      margin-left: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 页面标题 -->
+    <div class="page-header">
+      <a href="medication.html" class="back-btn">‹</a>
+      <h1>新增投药</h1>
+    </div>
+    
+    <!-- 基本信息 -->
+    <div class="form-section">
+      <div class="section-title">基本信息</div>
+      <div class="form-item">
+        <span class="form-label"><span class="required">*</span> 选择投苗</span>
+        <select class="form-select">
+          <option>请选择投苗记录</option>
+          <option>TM202401001 - 1号池 - 鳙鱼</option>
+          <option>TM202401002 - 2号池 - 鲢鱼</option>
+          <option>TM202401003 - 3号池 - 草鱼</option>
+        </select>
+        <span class="form-arrow">›</span>
+      </div>
+      <div class="form-item">
+        <span class="form-label"><span class="required">*</span> 投药日期</span>
+        <input type="date" class="form-input" id="medicationDate">
+      </div>
+    </div>
+    
+    <!-- 投药信息 -->
+    <div class="form-section">
+      <div class="section-title">投药信息</div>
+      <div class="form-item">
+        <span class="form-label"><span class="required">*</span> 药品名称</span>
+        <select class="form-select">
+          <option>请选择药品</option>
+          <option>漂白粉</option>
+          <option>生石灰</option>
+          <option>高锰酸钾</option>
+          <option>聚维酮碘</option>
+        </select>
+        <span class="form-arrow">›</span>
+      </div>
+      <div class="form-item">
+        <span class="form-label"><span class="required">*</span> 投药原因</span>
+        <select class="form-select">
+          <option>请选择原因</option>
+          <option>消毒</option>
+          <option>调节水质</option>
+          <option>治疗鱼病</option>
+          <option>预防疾病</option>
+        </select>
+        <span class="form-arrow">›</span>
+      </div>
+      <div class="form-item">
+        <span class="form-label"><span class="required">*</span> 用药剂量</span>
+        <input type="text" class="form-input" placeholder="请输入用药剂量">
+      </div>
+    </div>
+    
+    <!-- 其他信息 -->
+    <div class="form-section">
+      <div class="section-title">其他信息</div>
+      <div class="form-item">
+        <span class="form-label"><span class="required">*</span> 操作人</span>
+        <input type="text" class="form-input" placeholder="请输入操作人">
+      </div>
+      <div class="form-item">
+        <span class="form-label">备注</span>
+        <input type="text" class="form-input" placeholder="请输入备注">
+      </div>
+    </div>
+  </div>
+  
+  <!-- 底部操作栏 -->
+  <div class="bottom-bar">
+    <button class="btn btn-default" onclick="history.back()">取消</button>
+    <button class="btn btn-primary">保存</button>
+  </div>
+
+  <script>
+    document.getElementById('medicationDate').value = new Date().toISOString().split('T')[0];
+  </script>
+</body>
+</html>

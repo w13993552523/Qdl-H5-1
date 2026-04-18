@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>投喂详情</title>
+  <link rel="stylesheet" href="../css/common.css">
+  <style>
+    .page-header {
+      background: #52c41a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin: -16px -16px 16px -16px;
+      padding: 16px;
+    }
+    .back-btn {
+      position: absolute;
+      left: 16px;
+      color: #fff;
+      font-size: 28px;
+      text-decoration: none;
+    }
+    .page-header h1 {
+      color: #fff;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .detail-section {
+      background: #fff;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .section-title {
+      padding: 12px 16px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #333;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .detail-item {
+      display: flex;
+      padding: 14px 16px;
+      border-bottom: 1px solid #f5f5f5;
+    }
+    .detail-item:last-child {
+      border-bottom: none;
+    }
+    .detail-label {
+      width: 100px;
+      color: #666;
+      font-size: 14px;
+    }
+    .detail-value {
+      flex: 1;
+      color: #333;
+      font-size: 14px;
+      text-align: right;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+    .status-success {
+      background: #f6ffed;
+      color: #52c41a;
+    }
+    .status-pending {
+      background: #fff7e6;
+      color: #fa8c16;
+    }
+    .image-section { padding: 12px 16px; }
+    .image-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+    .image-item { aspect-ratio: 1; border-radius: 8px; overflow: hidden; background: #f5f5f5; }
+    .image-item img { width: 100%; height: 100%; object-fit: cover; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 页面标题 -->
+    <div class="page-header">
+      <a href="feeding.html" class="back-btn">‹</a>
+      <h1>投喂详情</h1>
+    </div>
+    
+    <!-- 基本信息 -->
+    <div class="detail-section">
+      <div class="section-title">基本信息</div>
+      <div class="detail-item">
+        <span class="detail-label">投喂编号</span>
+        <span class="detail-value">WF202401001</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">投喂日期</span>
+        <span class="detail-value">2024-01-15</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">状态</span>
+        <span class="detail-value"><span class="status-badge status-success">已完成</span></span>
+      </div>
+    </div>
+    
+    <!-- 投喂信息 -->
+    <div class="detail-section">
+      <div class="section-title">投喂信息</div>
+      <div class="detail-item">
+        <span class="detail-label">基地</span>
+        <span class="detail-value">千岛湖基地A</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">车间</span>
+        <span class="detail-value">1号车间</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">池塘</span>
+        <span class="detail-value">1号池</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">投苗记录</span>
+        <span class="detail-value">TM202401001 - 鳙鱼</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">饲料类型</span>
+        <span class="detail-value">颗粒饲料</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">投喂数量</span>
+        <span class="detail-value">50kg</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">投喂时间</span>
+        <span class="detail-value">08:00</span>
+      </div>
+    </div>
+    
+    <!-- 其他信息 -->
+    <div class="detail-section">
+      <div class="section-title">其他信息</div>
+      <div class="detail-item">
+        <span class="detail-label">操作人</span>
+        <span class="detail-value">张三</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">备注</span>
+        <span class="detail-value">上午投喂</span>
+      </div>
+    </div>
+
+    <!-- 在线图片 -->
+    <div class="detail-section">
+      <div class="section-title">在线图片</div>
+      <div class="image-section">
+        <div class="image-grid">
+          <div class="image-item"><img src="https://picsum.photos/200/200?random=70" alt="投喂图片"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 底部操作栏 -->
+  <div class="bottom-bar">
+    <button class="btn btn-default" onclick="history.back()">返回</button>
+    <a href="feeding-add.html?id=1" class="btn btn-primary">编辑</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>新增移池</title>
+  <link rel="stylesheet" href="../css/common.css">
+  <style>
+    .page-header {
+      background: #faad14;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin: -16px -16px 16px -16px;
+      padding: 16px;
+    }
+    .back-btn {
+      position: absolute;
+      left: 16px;
+      color: #fff;
+      font-size: 28px;
+      text-decoration: none;
+    }
+    .page-header h1 {
+      color: #fff;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .form-section {
+      background: #fff;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .section-title {
+      padding: 12px 16px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #333;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .form-item {
+      display: flex;
+      align-items: center;
+      padding: 14px 16px;
+      border-bottom: 1px solid #f5f5f5;
+    }
+    .form-item:last-child {
+      border-bottom: none;
+    }
+    .form-label {
+      width: 100px;
+      font-size: 15px;
+      color: #333;
+    }
+    .form-label .required {
+      color: #ff4d4f;
+    }
+    .form-input, .form-select {
+      flex: 1;
+      border: none;
+      text-align: right;
+      font-size: 15px;
+      color: #333;
+      outline: none;
+      background: transparent;
+    }
+    .form-input::placeholder {
+      color: #bbb;
+    }
+    .form-arrow {
+      color: #ccc;
+      margin-left: 8px;
+    }
+    .transfer-row {
+      display: flex;
+      gap: 8px;
+      padding: 8px 16px;
+      align-items: center;
+    }
+    .transfer-row select {
+      flex: 1;
+      height: 36px;
+      border: 1px solid #e8e8e8;
+      border-radius: 4px;
+      padding: 0 8px;
+    }
+    .transfer-row input {
+      width: 60px;
+      height: 36px;
+      border: 1px solid #e8e8e8;
+      border-radius: 4px;
+      padding: 0 8px;
+      text-align: center;
+    }
+    .add-transfer-btn {
+      margin: 8px 16px 16px;
+      width: calc(100% - 32px);
+      height: 36px;
+      background: #fff7e6;
+      border: 1px dashed #faad14;
+      border-radius: 4px;
+      color: #faad14;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 页面标题 -->
+    <div class="page-header">
+      <a href="transfer.html" class="back-btn">‹</a>
+      <h1>新增移池</h1>
+    </div>
+    
+    <!-- 基本信息 -->
+    <div class="form-section">
+      <div class="section-title">基本信息</div>
+      <div class="form-item">
+        <span class="form-label"><span class="required">*</span> 选择投苗</span>
+        <select class="form-select">
+          <option>请选择投苗记录</option>
+          <option>SE202604010001 - 1号池,2号池 - 加州鲈</option>
+          <option>SE202604010002 - 3号池 - 鳙鱼</option>
+        </select>
+        <span class="form-arrow">›</span>
+      </div>
+      <div class="form-item">
+        <span class="form-label"><span class="required">*</span> 移池时间</span>
+        <input type="datetime-local" class="form-input" id="transferTime">
+      </div>
+    </div>
+    
+    <!-- 移池明细 -->
+    <div class="form-section">
+      <div class="section-title">移池明细</div>
+      <div class="transfer-row">
+        <select>
+          <option>移出池塘</option>
+          <option>1号池</option>
+          <option>2号池</option>
+          <option>3号池</option>
+        </select>
+        <input type="number" placeholder="数量">
+        <span>尾</span>
+        <span style="color: #faad14; font-weight: bold;">→</span>
+        <select>
+          <option>移入池塘</option>
+          <option>3号池</option>
+          <option>4号池</option>
+          <option>5号池</option>
+        </select>
+      </div>
+      <button class="add-transfer-btn">+ 添加移池明细</button>
+    </div>
+    
+    <!-- 其他信息 -->
+    <div class="form-section">
+      <div class="section-title">其他信息</div>
+      <div class="form-item">
+        <span class="form-label"><span class="required">*</span> 操作人</span>
+        <input type="text" class="form-input" placeholder="请输入操作人">
+      </div>
+      <div class="form-item">
+        <span class="form-label">备注</span>
+        <input type="text" class="form-input" placeholder="请输入备注">
+      </div>
+    </div>
+  </div>
+  
+  <!-- 底部操作栏 -->
+  <div class="bottom-bar">
+    <button class="btn btn-default" onclick="history.back()">取消</button>
+    <button class="btn btn-primary">保存</button>
+  </div>
+
+  <script>
+    const now = new Date();
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+    document.getElementById('transferTime').value = now.toISOString().slice(0,16);
+  </script>
+</body>
+</html>
